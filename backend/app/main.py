@@ -40,13 +40,24 @@ app.add_middleware(
 # Security headers middleware (PRD Section 9)
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
+        # Never intercept, modify, or add security headers to HTTP OPTIONS preflight requests
+        if request.method == "OPTIONS":
+            return await call_next(request)
+
         response: Response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         # Don't apply restrictive CSP on API documentation routes or static assets
         doc_routes = ("/docs", "/redoc", "/scalar", "/openapi.json", "/static")
         if not any(request.url.path.startswith(p) for p in doc_routes):
-            response.headers["Content-Security-Policy"] = "default-src 'self'"
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self' https: http: data: blob:; "
+                "connect-src 'self' https: http: ws: wss:; "
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; "
+                "style-src 'self' 'unsafe-inline' https:; "
+                "img-src 'self' data: https: http:; "
+                "font-src 'self' data: https:;"
+            )
         else:
             response.headers["Content-Security-Policy"] = (
                 "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: http: data: blob:; "
@@ -54,7 +65,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
                 "style-src 'self' 'unsafe-inline' https: http:; "
                 "font-src 'self' data: https: http:; "
                 "img-src 'self' data: https: http:; "
-                "connect-src 'self' https: http: ws:; "
+                "connect-src 'self' https: http: ws: wss:; "
                 "worker-src 'self' blob:;"
             )
         return response

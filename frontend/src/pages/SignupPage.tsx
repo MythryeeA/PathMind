@@ -18,14 +18,21 @@ export const SignupPage: React.FC = () => {
 
     try {
       const { error } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
-        options: { data: { full_name: fullName } },
+        options: { data: { full_name: fullName.trim() } },
       });
       if (error) throw error;
       navigate('/tracks');
     } catch (err: any) {
-      setError(err.message || 'Failed to create account');
+      const rawMsg = err?.message || 'Failed to create account';
+      if (rawMsg.toLowerCase().includes('failed to fetch')) {
+        setError(
+          'Unable to reach authentication server. Please check your internet connection or verify credentials.'
+        );
+      } else {
+        setError(rawMsg);
+      }
     } finally {
       setLoading(false);
     }

@@ -16,11 +16,18 @@ export const LoginPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
       if (error) throw error;
       navigate('/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      const rawMsg = err?.message || 'Failed to sign in';
+      if (rawMsg.toLowerCase().includes('failed to fetch')) {
+        setError(
+          'Unable to reach authentication server. Please check your internet connection or verify credentials.'
+        );
+      } else {
+        setError(rawMsg);
+      }
     } finally {
       setLoading(false);
     }
