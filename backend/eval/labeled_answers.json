@@ -1,0 +1,142 @@
+[
+  {
+    "id": "item_1",
+    "question_stem": "A model achieves 99% accuracy on the training set but 61% accuracy on the validation set. What is the primary issue?",
+    "correct_answer": "Overfitting due to high model capacity fitting training noise.",
+    "learner_answer": "The model is overfitting because the training dataset is too small.",
+    "expected_misconception_id": "m_overfit_size"
+  },
+  {
+    "id": "item_2",
+    "question_stem": "What is the difference between an epoch and an iteration?",
+    "correct_answer": "An epoch is a full pass through the dataset; an iteration is one mini-batch step.",
+    "learner_answer": "Epoch and iteration are the exact same thing.",
+    "expected_misconception_id": "m_epoch_iter"
+  },
+  {
+    "id": "item_3",
+    "question_stem": "Does gradient descent always find the global minimum?",
+    "correct_answer": "No, it can get trapped in local minima or saddle points.",
+    "learner_answer": "Yes gradient descent guarantees finding the absolute global minimum.",
+    "expected_misconception_id": "m_gd_global"
+  },
+  {
+    "id": "item_4",
+    "question_stem": "If a dataset has 99% negative samples, is 99% accuracy a good metric?",
+    "correct_answer": "No, high accuracy can be trivial on imbalanced datasets.",
+    "learner_answer": "High accuracy always means the model is performing great even on imbalanced data.",
+    "expected_misconception_id": "m_acc_imbalanced"
+  },
+  {
+    "id": "item_5",
+    "question_stem": "Are precision and recall interchangeable?",
+    "correct_answer": "No, precision measures exactness while recall measures completeness.",
+    "learner_answer": "Precision and recall are the same metric written differently.",
+    "expected_misconception_id": "m_prec_recall"
+  },
+  {
+    "id": "item_6",
+    "question_stem": "Does transformer self-attention work like human visual attention?",
+    "correct_answer": "No, it is a mathematical routing matrix calculation.",
+    "learner_answer": "Attention is identical to human visual consciousness.",
+    "expected_misconception_id": "m_attention_human"
+  },
+  {
+    "id": "item_7",
+    "question_stem": "Does increasing LLM sampling temperature add new factual knowledge?",
+    "correct_answer": "No, temperature scales sampling logit probabilities, not stored knowledge.",
+    "learner_answer": "Higher temperature gives the model more knowledge and facts.",
+    "expected_misconception_id": "m_temp_knowledge"
+  },
+  {
+    "id": "item_8",
+    "question_stem": "When should you use RAG versus Fine-Tuning?",
+    "correct_answer": "RAG is for real-time document retrieval; fine-tuning is for style adaptation.",
+    "learner_answer": "RAG and fine-tuning are identical and do the exact same thing.",
+    "expected_misconception_id": "m_rag_ft_same"
+  },
+  {
+    "id": "item_9",
+    "question_stem": "Is an AI agent just a long system prompt?",
+    "correct_answer": "No, an agent includes reasoning loops, tool calling, and environment observation.",
+    "learner_answer": "An agent is just a longer prompt.",
+    "expected_misconception_id": "m_agent_prompt"
+  },
+  {
+    "id": "item_10",
+    "question_stem": "Are vector embeddings sparse one-hot arrays?",
+    "correct_answer": "No, embeddings are dense continuous vectors.",
+    "learner_answer": "Embeddings are one-hot vectors.",
+    "expected_misconception_id": "m_embed_onehot"
+  },
+  {
+    "id": "item_11",
+    "question_stem": "How do L1 and L2 regularization differ?",
+    "correct_answer": "L1 produces sparse weights; L2 shrinks weights proportionally.",
+    "learner_answer": "L1 and L2 shrink weights in identical linear patterns.",
+    "expected_misconception_id": "m_l1_l2_same"
+  },
+  {
+    "id": "item_12",
+    "question_stem": "Do bias and variance sum to a constant value?",
+    "correct_answer": "No, they trade off dynamically along with irreducible error.",
+    "learner_answer": "Bias and variance always sum to a constant total error.",
+    "expected_misconception_id": "m_bias_variance_sum"
+  },
+  {
+    "id": "item_13",
+    "question_stem": "Is ReLU a linear activation function?",
+    "correct_answer": "No, max(0,x) introduces non-linearity.",
+    "learner_answer": "ReLU is linear because its segments are straight lines.",
+    "expected_misconception_id": "m_relu_linear"
+  },
+  {
+    "id": "item_14",
+    "question_stem": "When does backpropagation run?",
+    "correct_answer": "Backward pass after loss calculation.",
+    "learner_answer": "Backpropagation computes predictions during the forward pass.",
+    "expected_misconception_id": "m_backprop_forward"
+  },
+  {
+    "id": "item_15",
+    "question_stem": "Does Batch Normalization compute test batch statistics at inference?",
+    "correct_answer": "No, it uses running averages collected during training.",
+    "learner_answer": "Batch norm uses test batch statistics during inference.",
+    "expected_misconception_id": "m_batchnorm_test"
+  },
+  {
+    "id": "item_16",
+    "question_stem": "Is Dropout active during model deployment?",
+    "correct_answer": "No, dropout is active only during training.",
+    "learner_answer": "Dropout turns off neurons randomly during deployment.",
+    "expected_misconception_id": "m_dropout_test"
+  },
+  {
+    "id": "item_17",
+    "question_stem": "Do max pooling layers have trainable weights?",
+    "correct_answer": "No, max pooling is a fixed spatial maximum operation.",
+    "learner_answer": "Max pooling layers have trainable parameter weights.",
+    "expected_misconception_id": "m_pooling_params"
+  },
+  {
+    "id": "item_18",
+    "question_stem": "Does one token equal one word?",
+    "correct_answer": "No, tokens are subwords.",
+    "learner_answer": "One token always equals one English word.",
+    "expected_misconception_id": "m_token_words"
+  },
+  {
+    "id": "item_19",
+    "question_stem": "Do vector databases perform exact string keyword matching?",
+    "correct_answer": "No, they measure vector distance similarity.",
+    "learner_answer": "Vector databases search exact keywords like SQL LIKE queries.",
+    "expected_misconception_id": "m_vector_keyword"
+  },
+  {
+    "id": "item_20",
+    "question_stem": "Does LoRA update all original model weights?",
+    "correct_answer": "No, base weights are frozen while rank matrices are trained.",
+    "learner_answer": "LoRA updates all original model weights.",
+    "expected_misconception_id": "m_lora_all"
+  }
+]
