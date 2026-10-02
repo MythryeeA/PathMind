@@ -1,10 +1,11 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response
-
 from fastapi.responses import HTMLResponse
 from fastapi.openapi.docs import get_redoc_html
+from fastapi.staticfiles import StaticFiles
 
 from .routers import topics, sessions, questions, answers, tutor, path, mastery, eval
 from dependencies import rate_limiter
@@ -16,7 +17,7 @@ app = FastAPI(
     redoc_url=None,  # Handled by custom /redoc
 )
 
-# CORS allowlist (PRD Section 9)
+# CORS configuration - Allow local development, all Vercel deployments, and wildcard access
 origins = [
     "http://localhost",
     "http://localhost:5173",
@@ -29,14 +30,12 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Ensures Vercel domain is never blocked by CORS
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-import os
-from fastapi.staticfiles import StaticFiles
 
 # Security headers middleware (PRD Section 9)
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
@@ -240,7 +239,6 @@ async def custom_swagger_ui_html():
           initSwaggerUI();
         };
         presetScript.onerror = function() {
-          // If preset fails, Swagger UI still works with BaseLayout
           initSwaggerUI();
         };
         document.body.appendChild(presetScript);
